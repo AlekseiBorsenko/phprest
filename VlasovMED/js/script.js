@@ -7,7 +7,7 @@ models.Example = Backbone.Model.extend({
 
 var ExampleLst = Backbone.Collection.extend({
     model: models.Example,
-    url: '/VlasovMED/php/lib/crudapi.php/example'
+    url: 'php/lib/crudapi.php/example'
 });
 
 var views = {};
