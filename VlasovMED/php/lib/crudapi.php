@@ -2743,4 +2743,3 @@ $api = new PHP_CRUD_API(array(
  	'charset'=>'utf8'
 ));
 $api->executeCommand();
-$api->executeCommand();
