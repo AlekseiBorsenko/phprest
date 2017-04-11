@@ -11,7 +11,8 @@
         <link rel="stylesheet" href="css/skeleton.css" />
     </head>
     <body>
-        <form>
+        <div align="center">
+            <form>
             <label for="lastname">Ваша Фамилия</label>
             <input id="lastname" />
             <label for="firstname">Ваше Имя</label>
@@ -24,5 +25,6 @@
             <select id="service"></select><br/>
             <button class="button-primary" type="button" id="submit">Запись</button>
         </form>
+        </div>
     </body>
 </html>
