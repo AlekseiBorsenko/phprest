@@ -63,15 +63,17 @@ CREATE TABLE IF NOT EXISTS `employee` (
 
 CREATE TABLE IF NOT EXISTS `admission` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  --`day_of_admisson` date NOT NULL,
-  --`start_time` time NOT NULL,
+  `date` varchar(200) NOT NULL,
+  `time` varchar(200) NOT NULL,
   --`end_time` time NOT NULL,
   `firstname` varchar(200) NOT NULL,
   `lastname` varchar(200) NOT NULL,
   `surname` varchar(200) NOT NULL,
   `contact` varchar(200), -- номер телефона пациента
+  `service_id` int(11) NOT NULL,
   --`employee_id` int(11) NOT NULL, -- врач ответственый за процедуру
-  PRIMARY KEY (`id`)--,
+  PRIMARY KEY (`id`),
+FOREIGN KEY(service_id) REFERENCES service(id)
   --FOREIGN KEY(employee_id) REFERENCES employee(id) -- FOREIGN KEY к таблице работников т.к. консультации не может быть без врача.
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
