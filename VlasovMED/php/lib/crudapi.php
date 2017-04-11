@@ -1502,8 +1502,11 @@ class PHP_CRUD_API {
 		array_unshift($params, $tables[0]);
 		$result = $this->db->query('INSERT INTO ! ('.$keys.') VALUES ('.$values.')',$params);
 		if (!$result) return null;
-		$insertId = $this->db->insertId($result);
-		return $insertId;
+                $insertId = $this->db->insertId($result);
+                // Backbone.js нужно получать весь обьект а не только ID
+                $newResult = $this->db->query('SELECT * FROM ! WHERE id = '.$insertId, $params);
+		
+		return $this->db->fetchAssoc($newResult);
 	}
 
 	protected function createObjects($inputs,$tables) {
