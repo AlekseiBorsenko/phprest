@@ -19,21 +19,22 @@ SET time_zone = "+00:00";
 --
 -- База данных: `db_clients`
 --
-
+--Множим базу на наль
+DROP TABLE IF EXISTS `admission`;
+DROP TABLE IF EXISTS `employee`;
+DROP TABLE IF EXISTS `service`;
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `admission`
+-- Структура таблицы `services`
 --
 
-CREATE TABLE IF NOT EXISTS `admission` (
+CREATE TABLE IF NOT EXISTS `service` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `day_of_admisson` date NOT NULL,
-  `start_time` time NOT NULL,
-  `end_time` time NOT NULL,
-  `patient_id` int(11) DEFAULT NULL,
+  `name` varchar(30) UNIQUE NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+
 
 -- --------------------------------------------------------
 
@@ -41,50 +42,39 @@ CREATE TABLE IF NOT EXISTS `admission` (
 -- Структура таблицы `people`
 --
 
-CREATE TABLE IF NOT EXISTS `people` (
+CREATE TABLE IF NOT EXISTS `employee` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
   `surname` varchar(20) NOT NULL,
   `secname` varchar(30) NOT NULL,
   `contacts` varchar(15) NOT NULL,
   `ddate` datetime NOT NULL,
-  `usluga` varchar(30) NOT NULL,
-  PRIMARY KEY (`id`)
+  `service_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY(service_id) REFERENCES service(id) -- подключаем поле сервисов т.к. у врача должна быть профессия (если может быть больше чем 1 проффессия то надо менять)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=62 ;
 
---
--- Дамп данных таблицы `people`
---
-
-INSERT INTO `people` (`id`, `name`, `surname`, `secname`, `contacts`, `ddate`, `usluga`) VALUES
-(2, 'Иван', 'Иванов', 'Иванович', '+79602115111', '2017-01-05 14:40:00', 'Стоматолог'),
-(59, 'Вячеслав', 'Жигунов', 'Николаевич', '+79218042236', '2017-03-23 09:30:00', 'Стоматолог'),
-(60, 'Татьяна', 'Андронова', '', '+79536548799', '2017-03-24 10:10:00', 'Массаж'),
-(61, 'Татьяна', 'Власова', 'Николаевна', '+79602114111', '2017-03-24 10:10:00', 'Массаж');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `services`
+-- Структура таблицы `admission` отвечает за запись к врачу.
 --
 
-CREATE TABLE IF NOT EXISTS `services` (
+CREATE TABLE IF NOT EXISTS `admission` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(30) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+  --`day_of_admisson` date NOT NULL,
+  --`start_time` time NOT NULL,
+  --`end_time` time NOT NULL,
+  `firstname` varchar(200) NOT NULL,
+  `lastname` varchar(200) NOT NULL,
+  `surname` varchar(200) NOT NULL,
+  `contact` varchar(200), -- номер телефона пациента
+  --`employee_id` int(11) NOT NULL, -- врач ответственый за процедуру
+  PRIMARY KEY (`id`)--,
+  --FOREIGN KEY(employee_id) REFERENCES employee(id) -- FOREIGN KEY к таблице работников т.к. консультации не может быть без врача.
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
---
--- Дамп данных таблицы `services`
---
-
-INSERT INTO `services` (`id`, `name`) VALUES
-(1, 'Терапевт'),
-(2, 'Узи'),
-(3, 'Гинеколог'),
-(4, 'Стоматолог'),
-(5, 'Массаж'),
-(6, 'Маникюр');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
