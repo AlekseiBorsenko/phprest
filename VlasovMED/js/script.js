@@ -74,7 +74,7 @@ views.AdmissionForm = Backbone.View.extend({
         this.model.set('contact',this.contact.val());
         this.model.set('service_id',this.service.val());
         this.model.save(null,{success:function(){
-                alert('result saved')
+                alert('Вы записаны')
         }})
     }
 });
