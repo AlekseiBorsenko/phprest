@@ -1,8 +1,15 @@
 $(function () {
 
-    var admissions = new models.AdmissionList();
-    var a = new views.AdmissionTable({collection:admissions});
-    admissions.fetch();
+    var service = new models.Service({name:'test'});
+    var services = new models.Services();
+    services.add(service);
+    service.save();
 
-})
+    $('#add_employee').on('click',function(){
+        var newEmployee = new models.Employee({firstname:'asd',lastname:'dsa',patronymic:'aaa'});
+        employees.add(newEmployee);
+        newEmployee.save();
+    });
+
+});
 

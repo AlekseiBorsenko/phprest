@@ -7,6 +7,9 @@ var services
 $(function () {
 
 
-    var a = new views.AdmissionForm();
+    var service = new models.Service({name:'test'});
+    var services = new models.Services();
+    services.add(service);
+    service.save();
 
 })

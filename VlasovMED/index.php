@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<?php 
+echo 'test';
+
+?>
 <html>
     <head>
         <meta charset="UTF-8">

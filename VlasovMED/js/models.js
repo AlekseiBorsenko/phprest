@@ -1,45 +1,15 @@
-var models = {};
-// услуга
-models.Service = Backbone.Model.extend({
-    id: null,
-    name: '',
-    parse: function (r) {
-        return {
-            id: r[0],
-            name: r[1]
-        };
-    }
-});
+/* global Backbone */
 
-// список услуг, подключается к CRUDAPI
-models.ServiceLst = Backbone.Collection.extend({
-    model: models.Service,
-    url: 'php/lib/crudapi.php/service',
-    parse: function (r) {
-        return r.service.records;
-    }
+var models = {};
+models.Service = Backbone.Model.extend({});
+
+models.Services = Backbone.Collection.extend({
+    model:models.Service,
+    url:'php/repo/services.php'
 });
-// запись на прием, она же пациент
-models.Admission = Backbone.Model.extend({
-    idAttribute:"id",
-    url: 'php/lib/crudapi.php/admission',
-    parse: function (r) {
-        return {
-            id: r[0],
-            date: r[1],
-            time: r[2],
-            firstname: r[3],
-            lastname: r[4],
-            surname: r[5],
-            contact: r[6],
-            service_id: r[7],
-        };
-    }
+models.Employee = Backbone.Model.extend({});
+
+models.Employees = Backbone.Collection.extend({
+    url:'php/controller/employees.php'
+    
 });
-models.AdmissionList = Backbone.Collection.extend({
-    model: models.Admission,
-    url: 'php/lib/crudapi.php/admission',
-    parse: function (r) {
-        return r.admission.records;
-    }
-})
